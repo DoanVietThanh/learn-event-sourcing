@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-BookServiceApplication<book_service>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "thanhdoan.book_service.BookServiceApplication",
+      "projectName": "book_service",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
