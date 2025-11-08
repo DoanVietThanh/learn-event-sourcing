@@ -2,6 +2,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "DiscoveryServiceApplication",
+      "request": "launch",
+      "mainClass": "thanhdoan.discovery_service.DiscoveryServiceApplication",
+      "projectName": "discovery_service"
+    },
+    {
+      "type": "java",
       "name": "Spring Boot-BookServiceApplication<book_service>",
       "request": "launch",
       "cwd": "${workspaceFolder}",
