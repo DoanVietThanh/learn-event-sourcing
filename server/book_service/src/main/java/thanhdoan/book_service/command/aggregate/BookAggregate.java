@@ -11,7 +11,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import thanhdoan.book_service.command.command.CreateBookCommand;
+import thanhdoan.book_service.command.command.DeleteBookCommand;
+import thanhdoan.book_service.command.command.UpdateBookCommand;
 import thanhdoan.book_service.command.event.BookCreatedEvent;
+import thanhdoan.book_service.command.event.BookDeletedEvent;
+import thanhdoan.book_service.command.event.BookUpdatedEvent;
 
 @Aggregate
 @Getter
@@ -28,6 +32,7 @@ public class BookAggregate {
 
   private Boolean isReady;
 
+  // Command Handler
   @CommandHandler
   public BookAggregate(CreateBookCommand command) {
     BookCreatedEvent bookCreatedEvent = new BookCreatedEvent();
@@ -35,11 +40,39 @@ public class BookAggregate {
     AggregateLifecycle.apply(bookCreatedEvent);
   }
 
+  @CommandHandler
+  public void handle(UpdateBookCommand command) {
+    BookUpdatedEvent bookUpdatedEvent = new BookUpdatedEvent();
+    BeanUtils.copyProperties(command, bookUpdatedEvent);
+    AggregateLifecycle.apply(bookUpdatedEvent);
+  }
+
+  @CommandHandler
+  public void handle(DeleteBookCommand command) {
+    BookDeletedEvent bookDeletedEvent = new BookDeletedEvent();
+    BeanUtils.copyProperties(command, bookDeletedEvent);
+    AggregateLifecycle.apply(bookDeletedEvent);
+  }
+
+  // Event Sourcing Handler
   @EventSourcingHandler
   public void on(BookCreatedEvent event) {
     this.id = event.getId();
     this.name = event.getName();
     this.author = event.getAuthor();
     this.isReady = event.getIsReady();
+  }
+
+  @EventSourcingHandler
+  public void on(BookUpdatedEvent event) {
+    this.id = event.getId();
+    this.name = event.getName();
+    this.author = event.getAuthor();
+    this.isReady = event.getIsReady();
+  }
+
+  @EventSourcingHandler
+  public void on(BookDeletedEvent event) {
+    this.id = event.getId();
   }
 }

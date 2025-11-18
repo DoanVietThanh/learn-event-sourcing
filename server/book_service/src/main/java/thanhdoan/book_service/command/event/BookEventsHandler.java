@@ -1,5 +1,7 @@
 package thanhdoan.book_service.command.event;
 
+import java.util.Optional;
+
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +21,24 @@ public class BookEventsHandler {
     Book book = new Book();
     BeanUtils.copyProperties(event, book);
     bookRepository.save(book);
+  }
+
+  @EventHandler
+  public void on(BookUpdatedEvent event) {
+    Optional<Book> existingBook = bookRepository.findById(event.getId());
+    existingBook.ifPresent(book -> {
+      book.setName(event.getName());
+      book.setAuthor(event.getAuthor());
+      book.setIsReady(event.getIsReady());
+      bookRepository.save(book);
+    });
+  }
+
+  @EventHandler
+  public void on(BookDeletedEvent event) {
+    Optional<Book> existingBook = bookRepository.findById(event.getId());
+    existingBook.ifPresent(book -> {
+      bookRepository.delete(book);
+    });
   }
 }
