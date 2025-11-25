@@ -16,6 +16,16 @@
       "projectName": "book_service",
       "args": "",
       "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-EmployeeServiceApplication<employee_service>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "thanhdoan.employee_service.EmployeeServiceApplication",
+      "projectName": "employee_service",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
     }
   ]
 }
