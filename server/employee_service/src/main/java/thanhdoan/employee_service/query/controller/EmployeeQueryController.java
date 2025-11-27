@@ -11,17 +11,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import thanhdoan.employee_service.query.model.EmployeeResponseModel;
 import thanhdoan.employee_service.query.queries.GetAllEmployeeQuery;
 import thanhdoan.employee_service.query.queries.GetDetailEmployeeQuery;
 
 @RestController
 @RequestMapping("/api/v1/employees")
+@Tag(name = "Employee Query", description = "Employee Query API")
 public class EmployeeQueryController {
 
   @Autowired
   private QueryGateway queryGateway;
 
+  @Operation(summary = "Get all employees", description = "Get all employees by isDisciplined filter", method = "GET", responses = {
+      @ApiResponse(responseCode = "200", description = "Success"),
+      @ApiResponse(responseCode = "400", description = "Bad Request"),
+      @ApiResponse(responseCode = "500", description = "Internal Server Error")
+  })
   @GetMapping
   public List<EmployeeResponseModel> getAllEmployee(
       @RequestParam(required = false, defaultValue = "false") Boolean isDisciplined) {

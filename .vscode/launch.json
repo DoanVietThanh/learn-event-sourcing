@@ -26,6 +26,16 @@
       "projectName": "employee_service",
       "args": "",
       "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-ApiGatewayApplication<api_gateway>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "thanhdoan.api_gateway.ApiGatewayApplication",
+      "projectName": "api_gateway",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
     }
   ]
 }

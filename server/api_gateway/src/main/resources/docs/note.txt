@@ -1,0 +1,4 @@
+https://docs.spring.io/spring-cloud-gateway/reference/spring-cloud-gateway-server-webmvc/filters/loadbalancer.html
+
+Cách tạo Customized Spring Cloud Gateway Filter
+https://spring.io/blog/2022/08/26/creating-a-custom-spring-cloud-gateway-filter
